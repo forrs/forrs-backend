@@ -1,0 +1,13 @@
+[package]
+name = "forrs-backend"
+version = "0.1.0"
+authors = ["Follpvosten <wolfi@karpador.xyz>"]
+edition = "2018"
+
+[features]
+default = []
+big-numbers = ["forrs-data/big-numbers"]
+
+[dependencies]
+forrs-data = { git = "https://github.com/forrs/forrs-data", features = ["postgres"] }
+rocket = { git="https://github.com/SergioBenitez/Rocket.git", branch="async" }
