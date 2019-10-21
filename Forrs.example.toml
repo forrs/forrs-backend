@@ -1,0 +1,6 @@
+[database]
+host = "localhost"
+port = 5432
+db_name = "forrs"
+user = "forrs"
+password = "<your password>"
