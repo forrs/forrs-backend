@@ -93,7 +93,7 @@ impl Client {
     where
         T: Table + FromRow,
     {
-        let query = format!("SELECT * FROM {}", T::tablename());
+        let query = format!("SELECT * FROM {}", T::TABLENAME);
         self.fetch_items(query.as_str(), &[]).await
     }
 
@@ -109,13 +109,13 @@ impl Client {
                     use tokio_postgres::error::SqlState;
                     if sql_state == &SqlState::UNIQUE_VIOLATION {
                         return Err(Error::NonUniqueName {
-                            table: T::tablename().into(),
-                            field: T::name_field().unwrap().into(),
+                            table: T::TABLENAME.into(),
+                            field: T::NAME_FIELD.unwrap().into(),
                         });
                     }
                 }
                 Err(Error::DbError {
-                    context: format!("saving {}", T::tablename()),
+                    context: format!("saving {}", T::TABLENAME),
                     source: e,
                 })
             })

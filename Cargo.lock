@@ -308,7 +308,7 @@ dependencies = [
 [[package]]
 name = "forrs-data"
 version = "0.0.2"
-source = "git+https://github.com/forrs/forrs-data#173292fca9ccb63abd01e7a1756bcf928559c790"
+source = "git+https://github.com/forrs/forrs-data#83caeefb506fe34faf2cdd6dec4027947fe41514"
 dependencies = [
  "bytes 0.4.12 (registry+https://github.com/rust-lang/crates.io-index)",
  "cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
