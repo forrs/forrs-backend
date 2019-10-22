@@ -6,7 +6,7 @@ use std::fs;
 mod config;
 use config::*;
 mod error;
-use error::Error;
+use error::launch;
 
 mod rest;
 
@@ -20,7 +20,7 @@ async fn config(conf: State<'_, Config>) -> String {
     format!("{:#?}", conf)
 }
 
-fn main() -> Result<(), Error> {
+fn main() -> Result<(), launch::Error> {
     let config: Config = fs::read_to_string("Forrs.toml")?.parse()?;
     Ok(rocket::ignite()
         .manage(config)
