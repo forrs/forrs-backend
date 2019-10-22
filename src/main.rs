@@ -9,6 +9,7 @@ mod error;
 use error::launch;
 
 mod rest;
+mod db;
 
 #[get("/")]
 async fn index() -> &'static str {

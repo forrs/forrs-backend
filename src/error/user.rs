@@ -19,8 +19,8 @@ pub enum Error {
         context: String,
         source: tokio_postgres::Error,
     },
-    #[snafu(display("The {} '{}' already exists!", table, value))]
-    NonUniqueName { table: String, value: String },
+    #[snafu(display("A {} must have a unique {}!", table, field))]
+    NonUniqueName { table: String, field: String },
     #[snafu(display("Not found: {}", context))]
     NotFound { context: String },
 }
