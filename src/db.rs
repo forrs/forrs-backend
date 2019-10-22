@@ -1,12 +1,33 @@
 use futures::FutureExt;
+use rocket::{
+    http::Status,
+    request::{FromRequestAsync, FromRequestFuture, Outcome, Request, State},
+    try_outcome,
+};
 use snafu::ResultExt;
 use tokio_postgres::{types::ToSql, Config as PGConfig, NoTls, ToStatement};
 
-use crate::{config::DbConfig, error::user::*};
+use crate::{config::*, error::user::*};
 use forrs_data::sql::{FromRow, IntoInsert, Table};
 
 pub struct Client {
     inner: tokio_postgres::Client,
+}
+
+impl<'a, 'r> FromRequestAsync<'a, 'r> for Client {
+    type Error = ();
+    fn from_request<'fut>(request: &'a Request<'r>) -> FromRequestFuture<'fut, Self, Self::Error>
+    where
+        'a: 'fut,
+    {
+        Box::pin(async move {
+            let conf = try_outcome!(request.guard::<State<Config>>());
+            match Self::connect(&conf.database).await {
+                Ok(s) => Outcome::Success(s),
+                Err(_) => Outcome::Failure((Status::InternalServerError, ())),
+            }
+        })
+    }
 }
 
 impl Client {
