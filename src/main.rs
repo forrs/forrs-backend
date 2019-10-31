@@ -8,8 +8,8 @@ use config::*;
 mod error;
 use error::launch;
 
-mod rest;
 mod db;
+mod rest;
 
 #[get("/")]
 async fn index() -> &'static str {

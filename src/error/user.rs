@@ -12,7 +12,7 @@ pub enum Error {
     #[snafu(display("Error {}: {}", context, source))]
     General {
         context: String,
-        source: Box<dyn std::error::Error + Send>,
+        source: Box<dyn std::error::Error + Send + Sync>,
     },
     #[snafu(display("Database error {}: {}", context, source))]
     DbError {
