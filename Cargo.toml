@@ -6,10 +6,11 @@ edition = "2018"
 
 [features]
 default = []
-big-numbers = ["forrs-data/big-numbers"]
+big-numbers = ["forrs-data/big-numbers", "forrs-stm/big-numbers"]
 
 [dependencies]
-forrs-data = { git = "https://github.com/forrs/forrs-data", features = ["postgres"] }
+forrs-data = { git = "https://github.com/forrs/forrs-data", features = ["db"] }
+forrs-stm = { git = "https://github.com/forrs/forrs-data", features = ["with-rocket"] }
 rocket = { git="https://github.com/SergioBenitez/Rocket.git", branch="async" }
 rocket_contrib = { git="https://github.com/SergioBenitez/Rocket.git", branch="async" }
 tokio-postgres = "0.5.0-alpha.1"

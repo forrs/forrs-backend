@@ -14,7 +14,7 @@ pub enum Error {
         context: String,
         source: Box<dyn std::error::Error + Send + Sync>,
     },
-    #[snafu(display("Database error {}: {}", context, source))]
+    #[snafu(display("Error {}: {}", context, source))]
     DbError {
         context: String,
         source: tokio_postgres::Error,
